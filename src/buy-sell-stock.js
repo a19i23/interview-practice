@@ -25,36 +25,56 @@
 // }
 
 // O(n) time complexity
-function stockBuySell(prices){
-  let lowestPrice = Number.MAX_SAFE_INTEGER;
-  let lowestPricePosition = 0;
-  let highestPricePosition = 0;
-  let highestPrice = 0;
-  let maxProfit = Number.MIN_SAFE_INTEGER; 
+// function stockBuySell(prices){
+//   let lowestPrice = Number.MAX_SAFE_INTEGER;
+//   let lowestPricePosition = 0;
+//   let highestPricePosition = 0;
+//   let highestPrice = 0;
+//   let maxProfit = Number.MIN_SAFE_INTEGER; 
 
-  if(!(prices.length >1))return "Need more than one stock price"
+//   if(!(prices.length >1))return "Need more than one stock price"
 
-  prices.forEach((price, i) => {
-    // check if lowest price
-    if (price < lowestPrice){
-      lowestPrice = price;
-      lowestPricePosition = i;
-    }
+//   prices.forEach((price, i) => {
+//     // check if lowest price
+//     if (price < lowestPrice){
+//       lowestPrice = price;
+//       lowestPricePosition = i;
+//     }
     
-    const nextDayPrice = prices[i+1];
-    if (nextDayPrice && nextDayPrice > price && nextDayPrice > highestPrice){
-      highestPrice = nextDayPrice;
-      highestPricePosition = i+1;
-      const profit = nextDayPrice - price;
-      if (profit > maxProfit){
-        maxProfit = profit;
+//     const nextDayPrice = prices[i+1];
+//     if (nextDayPrice && nextDayPrice > price && nextDayPrice > highestPrice){
+//       highestPrice = nextDayPrice;
+//       highestPricePosition = i+1;
+//       const profit = nextDayPrice - price;
+//       if (profit > maxProfit){
+//         maxProfit = profit;
+//       }
+//     }
+    
+//   });
+//   return `buy on day ${lowestPricePosition +1}, sell on day ${highestPricePosition +1}`
+// }
+
+  // leet code solution
+  function stockBuySell(prices) {
+    let lowestPrice = Number.MAX_VALUE;
+    let maxProfit = 0;
+    let lowIndex = 0;
+    let highIndex = 0;
+
+    if (prices.length <2) return "Must be more than one price"
+
+    prices.forEach((price,i) => {
+      if (price < lowestPrice){
+        lowestPrice = price;
+        lowIndex = i;
+      } else if (price - lowestPrice > maxProfit){
+        maxProfit = price - lowestPrice;
+        highIndex = i;
       }
-    }
-    
-  });
-
-  return `buy on day ${lowestPricePosition +1}, sell on day ${highestPricePosition +1}`
-}
+    })
+    return `Buy on day ${lowIndex +1}, sell on day ${highIndex +1}`
+  }
 
 console.log(stockBuySell([110]));
 
