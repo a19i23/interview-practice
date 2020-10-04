@@ -44,8 +44,6 @@ function reverseWords(inputArray, spaceArray){
       }
     }
   }
-
-
 }
 
 const inputArray = [ 'c', 'a', 'k', 'e', ' ',
